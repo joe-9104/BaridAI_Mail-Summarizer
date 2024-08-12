@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BaridAI - Email Assistant</title>
+    <link rel="stylesheet" href="taskpane.css"/>
+    <link rel="icon" href="../../assets/icon-16.png"/>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <script src="taskpane.js"></script>
+</head>
+<body>
+    <div class="head">
+        <div class="flags">
+            <img id="fr_flag" src="../../assets/french_flag.jpg" alt="French" title="Switch to French" onclick="setLanguage('fr')"/>
+            <img id="uk_flag" src="../../assets/uk_flag.svg" alt="English" title="English" onclick="setLanguage('en')"/>
+        </div>
+        <div class="header">
+            <h1 id="headerText">SummarizerAI - Your Email Summarizer</h1>
+        </div>
+    </div>
+
+    <p id="descriptionText">BaridAI uses advanced AI to help you compose emails effortlessly. Save time and boost productivity!</p>
+    <a id="atext" href="#" onclick="showMoreLess()">How to use BaridAI?</a>
+
+    <div class="main">
+        <p id="summaryText">Text will appear here</p>
+        <button id="buttonClick" onclick="summarizeEmail()">Summarize Email</button>
+        <div id="placeholdermsg" class="vidDiv" style="display:none;">
+            <video id="loadingVideo" src="../../assets/dynamic_logo.mp4" autoplay loop muted 
+                   style="height: 60px; border-radius: 15px; border: 5px solid rgba(255,255,255,0.5); align-items: center;"></video>
+        </div>
+    </div>
+    <img src="../../assets/icon-128.png" alt="Photo" class="bottom-right-photo"/>
+</body>
+</html>

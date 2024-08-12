@@ -1,0 +1,153 @@
+
+body {
+    background: 
+    linear-gradient(to bottom, white 45%, #955c95);
+    font-family: Calibri, sans-serif;
+    font-size: clamp(14px, 4.5vw, 20px); /* Dynamic font size for body */
+    color: #3f3f3f;
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed; /* Ensures the gradient doesn't repeat */
+}
+
+.head, .main {
+    position: relative; /* Ensure other elements stack above the background */
+    z-index: 1;
+}
+
+/* Style the positionning between flags and header */
+.head {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style the flags */
+.flags {
+    position: inherit;
+    align-self: flex-end;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+.flags img {
+    height: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* Style the header */
+.header {
+    padding: 20px 20px 0 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: clamp(20px, 3vw, 30px); /* Dynamic font size for h1 */
+    color: #3f3f3f;
+    text-align: left; /* Align the header to the left */
+}
+
+p {
+    font-size: clamp(14px, 4.75vw, 26px); /* Dynamic font size for paragraphs */
+    padding: 0 20px 0 20px;
+    margin-bottom: 0;
+    text-align: justify;
+}
+
+#descriptionText {
+    max-height: 4.5em;
+    transition: max-height 0.75s ease, opacity 0.75s ease; /* Smooth transition for height and opacity */
+    opacity: 1;
+}
+
+#descriptionText.expanded {
+    max-height: 15em;
+    opacity: 1;
+}
+
+#descriptionText.collapsed {
+    max-height: 4.5em;
+    opacity: 1;
+}
+
+
+#atext {
+    padding-left: 20px;
+    font-size: clamp(12px, 14px, 16px); /* Dynamic font size for links */
+    color: #6b1780;
+}
+
+#atext:hover {
+    color: #cc25cc;
+}
+
+/* Style the main content area */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+    padding: 20px;
+}
+
+/* Style the placeholder message */
+.vidDiv {
+    display: flex;
+    justify-content: center;
+    margin: 25px;
+    width: 100%;
+}
+
+/* Style the textarea */
+#emailInput {
+    width: 100%;
+    height: 25vh;
+    margin-bottom: 20px;
+    margin-top: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: Calibri, sans-serif;
+    font-size: clamp(12px, 4.5vw, 24px); /* Dynamic font size for button */
+    color: black;
+    border-radius: 5px;
+    border-color: #6b1780;
+}
+
+#emailInput:focus {
+    outline-color: #6b1780;
+}
+
+/* Style the button */
+#buttonClick {
+    background-color: #955c95;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: flex-start; /* Align button to the left */
+}
+
+#buttonClick:hover {
+    background-color: #533353;
+}
+
+#buttonClick:focus {
+    border: 3px solid #724772;
+}
+
+#buttonClick:disabled {
+    background-color: #d7a8d7;
+    cursor: not-allowed;
+    border: 1px solid #533353;
+}
+
+.bottom-right-photo {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 50%;
+    height: auto;
+}
