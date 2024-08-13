@@ -2,7 +2,7 @@
 body {
     background: 
     linear-gradient(to bottom, white 45%, #955c95);
-    font-family: Calibri, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: clamp(14px, 4.5vw, 20px); /* Dynamic font size for body */
     color: #3f3f3f;
     margin: 0;
@@ -35,6 +35,11 @@ body {
     cursor: pointer;
 }
 
+.disabledFlags {    /* Define flags behaviour while disabled */
+    pointer-events: none; /* Disables clicking */
+    opacity: 0.5; /* Makes the element look disabled */
+}
+
 /* Style the header */
 .header {
     padding: 20px 20px 0 20px;
@@ -47,6 +52,7 @@ body {
     text-align: left; /* Align the header to the left */
 }
 
+/* General configuration for <p> elements */
 p {
     font-size: clamp(14px, 4.75vw, 26px); /* Dynamic font size for paragraphs */
     padding: 0 20px 0 20px;
@@ -54,6 +60,7 @@ p {
     text-align: justify;
 }
 
+/* Style the description text */
 #descriptionText {
     max-height: 4.5em;
     transition: max-height 0.75s ease, opacity 0.75s ease; /* Smooth transition for height and opacity */
@@ -70,7 +77,7 @@ p {
     opacity: 1;
 }
 
-
+/* Style the 'Show more/Show less' text */
 #atext {
     padding-left: 20px;
     font-size: clamp(12px, 14px, 16px); /* Dynamic font size for links */
@@ -97,23 +104,17 @@ p {
     width: 100%;
 }
 
-/* Style the textarea */
-#emailInput {
-    width: 100%;
-    height: 25vh;
-    margin-bottom: 20px;
-    margin-top: 0;
+/* Style the summary text */
+#summaryText {
+    background-color: white;
+    border: 2px solid #ccc;
     padding: 10px;
+    border-radius: 8px;
+    color: gray;
+    width: 100%;
     box-sizing: border-box;
-    font-family: Calibri, sans-serif;
-    font-size: clamp(12px, 4.5vw, 24px); /* Dynamic font size for button */
-    color: black;
-    border-radius: 5px;
-    border-color: #6b1780;
-}
-
-#emailInput:focus {
-    outline-color: #6b1780;
+    white-space: pre-wrap;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Style the button */
@@ -130,7 +131,7 @@ p {
     align-self: flex-start; /* Align button to the left */
 }
 
-#buttonClick:hover {
+#buttonClick:not(:disabled):hover {
     background-color: #533353;
 }
 
@@ -139,7 +140,6 @@ p {
 }
 
 #buttonClick:disabled {
-    background-color: #d7a8d7;
     cursor: not-allowed;
     border: 1px solid #533353;
 }

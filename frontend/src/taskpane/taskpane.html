@@ -14,15 +14,15 @@
             <img id="uk_flag" src="../../assets/uk_flag.svg" alt="English" title="English" onclick="setLanguage('en')"/>
         </div>
         <div class="header">
-            <h1 id="headerText">SummarizerAI - Your Email Summarizer</h1>
+            <h1 id="headerText">BaridAI - Your Email Assistant</h1>
         </div>
     </div>
 
-    <p id="descriptionText">BaridAI uses advanced AI to help you compose emails effortlessly. Save time and boost productivity!</p>
-    <a id="atext" href="#" onclick="showMoreLess()">How to use BaridAI?</a>
+    <p id="descriptionText">BaridAI uses advanced AI to quickly summarize emails. Streamline your workflow and increase productivity!</p>
+    <a id="atext" href="#" onclick="showMoreLess()">Show more</a>
 
     <div class="main">
-        <p id="summaryText">Text will appear here</p>
+        <pre id="summaryText">Click to summarize...</pre>
         <button id="buttonClick" onclick="summarizeEmail()">Summarize Email</button>
         <div id="placeholdermsg" class="vidDiv" style="display:none;">
             <video id="loadingVideo" src="../../assets/dynamic_logo.mp4" autoplay loop muted 
