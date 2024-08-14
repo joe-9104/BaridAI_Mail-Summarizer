@@ -9,7 +9,7 @@ app = Flask(__name__)
 CORS(app)
 SSLify(app)
 
-def summarize_email(email_content):
+def summarize_email(email_content, lang):
     try:
         load_dotenv()
         genai.configure(api_key=os.getenv("api_key"))
@@ -26,17 +26,18 @@ def summarize_email(email_content):
             generation_config=generation_config,
         )
         chat_session = model.start_chat()
-        return chat_session.send_message(f"summarize this mail: \n{email_content}").text
+        return chat_session.send_message(f"summarize this mail in {lang}: \n{email_content}").text
     except Exception as e:
         return f"BaridAI faced problems: {e}"
 
 @app.route('/summarize', methods=['POST'])
 def summarize():
     email_content = request.json.get('email_content', '')
+    language = request.json.get('language', 'english')
     if not email_content:
         return jsonify({'error': 'Email content is required'}), 400
     
-    summary = summarize_email(email_content)
+    summary = summarize_email(email_content, language)
     return jsonify({'summary': summary}), 200
 
 if __name__ == '__main__':

@@ -86,8 +86,8 @@
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GroupLabel" DefaultValue=" Generative AI "/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Summarizer"/>
-        <bt:String id="TaskpaneButton.Title" DefaultValue="Summarizer"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="BaridAI"/>
+        <bt:String id="TaskpaneButton.Title" DefaultValue="BaridAI"/>
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="TaskpaneButton.Tooltip" DefaultValue="An AI-powered Outlook add-in for effortless email summarization."/>

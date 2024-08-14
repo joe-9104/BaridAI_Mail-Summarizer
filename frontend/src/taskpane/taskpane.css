@@ -1,7 +1,7 @@
 
 body {
     background: 
-    linear-gradient(to bottom, white 45%, #955c95);
+    linear-gradient(to bottom, white 45%, #4d8395);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: clamp(14px, 4.5vw, 20px); /* Dynamic font size for body */
     color: #3f3f3f;
@@ -63,7 +63,7 @@ p {
 /* Style the description text */
 #descriptionText {
     max-height: 4.5em;
-    transition: max-height 0.75s ease, opacity 0.75s ease; /* Smooth transition for height and opacity */
+    transition: max-height 2s ease, opacity 2s ease; /* Smooth transition for height and opacity */
     opacity: 1;
 }
 
@@ -81,11 +81,11 @@ p {
 #atext {
     padding-left: 20px;
     font-size: clamp(12px, 14px, 16px); /* Dynamic font size for links */
-    color: #6b1780;
+    color: #4d8395;
 }
 
 #atext:hover {
-    color: #cc25cc;
+    color: #74c6e1;
 }
 
 /* Style the main content area */
@@ -110,6 +110,7 @@ p {
     border: 2px solid #ccc;
     padding: 10px;
     border-radius: 8px;
+    border: 2px solid #38606e;
     color: gray;
     width: 100%;
     box-sizing: border-box;
@@ -117,9 +118,13 @@ p {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#summaryText.focused {
+    border: 3px solid #2d4953;
+}
+
 /* Style the button */
 #buttonClick {
-    background-color: #955c95;
+    background-color: #4d8395;
     color: white;
     font-family: 'Segoe UI', sans-serif;
     font-size: 14px;
@@ -132,16 +137,16 @@ p {
 }
 
 #buttonClick:not(:disabled):hover {
-    background-color: #533353;
+    background-color: #2d4953;
 }
 
 #buttonClick:focus {
-    border: 3px solid #724772;
+    border: 3px solid #38606e;
 }
 
 #buttonClick:disabled {
     cursor: not-allowed;
-    border: 1px solid #533353;
+    border: 1px solid #38606e;
 }
 
 .bottom-right-photo {

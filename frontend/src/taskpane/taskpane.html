@@ -5,13 +5,14 @@
     <link rel="stylesheet" href="taskpane.css"/>
     <link rel="icon" href="../../assets/icon-16.png"/>
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/langdetect-js@0.0.3/index.min.js"></script>
     <script src="taskpane.js"></script>
 </head>
 <body>
     <div class="head">
         <div class="flags">
-            <img id="fr_flag" src="../../assets/french_flag.jpg" alt="French" title="Switch to French" onclick="setLanguage('fr')"/>
-            <img id="uk_flag" src="../../assets/uk_flag.svg" alt="English" title="English" onclick="setLanguage('en')"/>
+            <img id="fr_flag" src="../../assets/french_flag.jpg" alt="French" title="Switch to French" onclick="setLanguage('french')"/>
+            <img id="uk_flag" src="../../assets/uk_flag.svg" alt="English" title="English" onclick="setLanguage('english')"/>
         </div>
         <div class="header">
             <h1 id="headerText">BaridAI - Your Email Assistant</h1>

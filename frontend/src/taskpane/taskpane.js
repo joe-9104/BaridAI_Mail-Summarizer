@@ -36,8 +36,14 @@ function showMoreLess() {
   }
 }
 
+// Define current language
+let currentLanguage = 'english'; // Default language
+
 //Function to set the language of the add-in
 function setLanguage(lang) {
+
+  currentLanguage = lang;
+
   const fr_flag = document.getElementById('fr_flag');
   const uk_flag = document.getElementById('uk_flag');
   const headerText = document.getElementById('headerText');
@@ -45,27 +51,38 @@ function setLanguage(lang) {
   const aText = document.getElementById('atext');
   const summaryElement = document.getElementById('summaryText');
   const buttonClick = document.getElementById('buttonClick');
+  const buttonState = buttonClick.disabled;
 
-  if (lang == 'fr') {
-    fr_flag.title = "Français";
-    uk_flag.title = "Basculer vers l'anglais";
-    headerText.textContent = "BaridAI - Votre Assistant de Messagerie";
-    descriptionText.textContent = shortDescriptionTextFr;
-    aText.innerHTML = longATextFr;
-    if(summaryElement.innerText === 'Click to summarize...'){
-      summaryElement.innerText = "Cliquer pour résumer..."
+  if (lang == 'french') { 
+    if(fr_flag.title != "Français"){ // If language is already set to french, no actions needed
+      fr_flag.title = "Français";
+      uk_flag.title = "Basculer vers l'anglais";
+      headerText.textContent = "BaridAI - Votre Assistant de Messagerie";
+      descriptionText.textContent = shortDescriptionTextFr;
+      aText.innerHTML = longATextFr;
+      if(summaryElement.innerText === 'Click to summarize...'){
+        summaryElement.innerText = "Cliquer pour résumer..."
+      }else{
+        buttonClick.disabled = ((summaryElement.innerText !== 'Click to summarize')&&(!buttonState))
+      }
+      buttonClick.innerText = "Résumer l'email"
     }
-    buttonClick.innerText = "Résumer l'email"
-  } else if (lang === 'en') {
-    fr_flag.title = "Switch to french";
-    uk_flag.title = "English";
-    headerText.textContent = "BaridAI - Your Email Assistant";
-    descriptionText.textContent = shortDescriptionTextEn;
-    aText.innerHTML = longATextEn;
-    if(summaryElement.innerText === 'Cliquer pour résumer...'){
-      summaryElement.innerText = "Click to summarize..."
+    
+  } else if (lang === 'english') {
+    if(uk_flag.title != "English"){ // Same for english
+      fr_flag.title = "Switch to french";
+      uk_flag.title = "English";
+      headerText.textContent = "BaridAI - Your Email Assistant";
+      descriptionText.textContent = shortDescriptionTextEn;
+      aText.innerHTML = longATextEn;
+      if(summaryElement.innerText === 'Cliquer pour résumer...'){
+        summaryElement.innerText = "Click to summarize..."
+      }else{
+        buttonClick.disabled = ((summaryElement.innerText !== 'Cliquer pour résumer')&&(!buttonState))
+      }
+      buttonClick.innerText = "Summarize email"
     }
-    buttonClick.innerText = "Summarize email"
+    
   }
 }
 
@@ -99,11 +116,14 @@ async function summarizeEmail() {
 
     // Disable button and change its color
     button.disabled = true;
-    button.style.backgroundColor = '#c2a1c1';
+    button.style.backgroundColor = '#95d7ef';
 
     // Disable flags
     frFlag.classList.add('disabledFlags');
     ukFlag.classList.add('disabledFlags');
+
+    // Focus on the summary element
+    summaryElement.classList.add('focused');
 
     // Show the placehloder video
     placeholderMessage.style.display = 'flex';
@@ -124,23 +144,23 @@ async function summarizeEmail() {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email_content: emailContent })
+            body: JSON.stringify({ email_content: emailContent, language: currentLanguage })
           });
           const data = await response.json();
 
           // Clear the summary text before displaying the new summary
-          summaryElement.innerHTML = '';
+          summaryElement.innerText = '';
 
           // Change the color of the text to black
           summaryElement.style.color = 'black';
 
-          // Split the summary text into words
+          // Split the summary text into words (regular expression to match each sequence of non-whitespaced characters followed by a whitespaced one)
           const words = data.summary.match(/\S+|[^\S\r\n]+|[\r\n]/g);
 
           // Display each word with a delay
           for (let i = 0; i < words.length; i++) {
-            await new Promise(resolve => setTimeout(resolve, 100)); // Adjust the delay time here
-            summaryElement.innerHTML += words[i] + (i < words.length - 1 ? ' ' : '');
+            await new Promise(resolve => setTimeout(resolve, 25)); // Adjust the delay time here
+            summaryElement.innerText += words[i] + (i < words.length - 1 ? ' ' : '');
           }
         }
         resolve();
@@ -154,6 +174,9 @@ async function summarizeEmail() {
 
     // Hide the placeholder video
     placeholderMessage.style.display = 'none';
+
+    // Unfocus on the summary element
+    summaryElement.classList.remove('focused');
 
     // Unable flags
     frFlag.classList.remove('disabledFlags');
