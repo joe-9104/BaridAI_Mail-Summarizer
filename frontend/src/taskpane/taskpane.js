@@ -60,10 +60,10 @@ function setLanguage(lang) {
       headerText.textContent = "BaridAI - Votre Assistant de Messagerie";
       descriptionText.textContent = shortDescriptionTextFr;
       aText.innerHTML = longATextFr;
-      if(summaryElement.innerText === 'Click to summarize...'){
-        summaryElement.innerText = "Cliquer pour résumer..."
+      if(summaryElement.innerText === 'Summarize in english...'){
+        summaryElement.innerText = "Résumer en français..."
       }else{
-        buttonClick.disabled = ((summaryElement.innerText !== 'Click to summarize')&&(!buttonState))
+        buttonClick.disabled = ((summaryElement.innerText !== 'Summarize in english')&&(!buttonState))
       }
       buttonClick.innerText = "Résumer l'email"
     }
@@ -75,10 +75,10 @@ function setLanguage(lang) {
       headerText.textContent = "BaridAI - Your Email Assistant";
       descriptionText.textContent = shortDescriptionTextEn;
       aText.innerHTML = longATextEn;
-      if(summaryElement.innerText === 'Cliquer pour résumer...'){
-        summaryElement.innerText = "Click to summarize..."
+      if(summaryElement.innerText === 'Résumer en français...'){
+        summaryElement.innerText = "Summarize in english..."
       }else{
-        buttonClick.disabled = ((summaryElement.innerText !== 'Cliquer pour résumer')&&(!buttonState))
+        buttonClick.disabled = ((summaryElement.innerText !== 'Résumer en français')&&(!buttonState))
       }
       buttonClick.innerText = "Summarize email"
     }
@@ -90,7 +90,7 @@ function setLanguage(lang) {
 Office.onReady(info => {
   if (info.host === Office.HostType.Outlook) {
     // Office is ready
-    console.log("Summarizer is ready...")
+    console.log("BaridAI - Mail Summarizer is ready...")
   }
 });
 
@@ -146,28 +146,39 @@ async function summarizeEmail() {
             },
             body: JSON.stringify({ email_content: emailContent, language: currentLanguage })
           });
-          const data = await response.json();
 
-          // Clear the summary text before displaying the new summary
-          summaryElement.innerText = '';
+          if(response.ok){
+            // Successful response
+            const data = await response.json();
 
-          // Change the color of the text to black
-          summaryElement.style.color = 'black';
+            // Clear the summary text before displaying the new summary
+            summaryElement.innerText = '';
 
-          // Split the summary text into words (regular expression to match each sequence of non-whitespaced characters followed by a whitespaced one)
-          const words = data.summary.match(/\S+|[^\S\r\n]+|[\r\n]/g);
+            // Change the color of the text to black
+            summaryElement.style.color = 'black';
 
-          // Display each word with a delay
-          for (let i = 0; i < words.length; i++) {
-            await new Promise(resolve => setTimeout(resolve, 25)); // Adjust the delay time here
-            summaryElement.innerText += words[i] + (i < words.length - 1 ? ' ' : '');
+            // Split the summary text into words (regular expression to match each sequence of non-whitespaced characters followed by a whitespaced one)
+            const words = data.summary.match(/\S+|[^\S\r\n]+|[\r\n]/g);
+
+            // Display each word with a delay
+            for (let i = 0; i < words.length; i++) {
+              await new Promise(resolve => setTimeout(resolve, 25)); // Adjust the delay time here
+              summaryElement.innerText += words[i] + (i < words.length - 1 ? ' ' : '');
+            }
+          }else{
+            const errorData = await response.json();
+            summaryElement.style.color = 'red';
+            summaryElement.innerText = 'BaridAI faced problems. Please try again later or check the console for more info.'
+            console.error("Backend error: ", errorData.error)
           }
         }
         resolve();
       });
     });
   } catch (error) {
-    console.error("An error occurred! ", error);
+    summaryElement.style.color = 'red';
+    summaryElement.innerText = 'Sorry :(, an error occured. Check the console for more info.'
+    console.error("Frontend error: \nAn error occurred! ", error);
   } finally {
     // Revert button color to the initial color
     button.style.backgroundColor = initialColor;

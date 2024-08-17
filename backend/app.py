@@ -28,17 +28,19 @@ def summarize_email(email_content, lang):
         chat_session = model.start_chat()
         return chat_session.send_message(f"summarize this mail in {lang}: \n{email_content}").text
     except Exception as e:
-        return f"BaridAI faced problems: {e}"
+        raise RuntimeError(f"BaridAI faced problems: {e}")
 
 @app.route('/summarize', methods=['POST'])
 def summarize():
     email_content = request.json.get('email_content', '')
     language = request.json.get('language', 'english')
     if not email_content:
-        return jsonify({'error': 'Email content is required'}), 400
-    
-    summary = summarize_email(email_content, language)
-    return jsonify({'summary': summary}), 200
+        return jsonify({'error': 'Email content is required'}), 400 # Bad Request
+    try:
+        summary = summarize_email(email_content, language)
+        return jsonify({'summary': summary}), 200
+    except RuntimeError as e:
+        return jsonify({'error': str(e)}), 500 # Internal Server Error
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
