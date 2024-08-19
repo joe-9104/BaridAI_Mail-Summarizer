@@ -26,7 +26,11 @@ def summarize_email(email_content, lang):
             generation_config=generation_config,
         )
         chat_session = model.start_chat()
-        return chat_session.send_message(f"summarize this mail in {lang}: \n{email_content}").text
+        summarization = chat_session.send_message(f"summarize this mail: \n{email_content}").text
+        if lang == 'english':
+            return summarization
+        else:
+            return chat_session.send_message(f"translate in {lang}: \n{summarization}").text
     except Exception as e:
         raise RuntimeError(f"BaridAI faced problems: {e}")
 

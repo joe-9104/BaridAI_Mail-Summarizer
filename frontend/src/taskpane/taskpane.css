@@ -23,6 +23,7 @@ body {
 
 /* Style the flags */
 .flags {
+    display: none;
     position: inherit;
     align-self: flex-end;
     padding-right: 20px;
@@ -38,6 +39,13 @@ body {
 .disabledFlags {    /* Define flags behaviour while disabled */
     pointer-events: none; /* Disables clicking */
     opacity: 0.5; /* Makes the element look disabled */
+}
+
+#toggleFlags {
+    cursor: pointer;
+    font-size: small;
+    margin-left: 16px;
+    color: #38606e;
 }
 
 /* Style the header */
@@ -62,7 +70,6 @@ p {
 
 /* Style the description text */
 #descriptionText {
-    max-height: 4.5em;
     transition: max-height 2s ease, opacity 2s ease; /* Smooth transition for height and opacity */
     opacity: 1;
 }
@@ -73,7 +80,6 @@ p {
 }
 
 #descriptionText.collapsed {
-    max-height: 4.5em;
     opacity: 1;
 }
 
