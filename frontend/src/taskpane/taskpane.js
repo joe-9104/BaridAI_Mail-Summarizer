@@ -14,8 +14,9 @@ const languageStrings = {
       aText: "Voir plus",
       oppositeAText: "Voir moins",
       buttonClick_text: "Résumer l'email",
-      summary_placeholder: "Résumer en français...",
-      opposite_summary_placeholder: "Summarize in english...",
+      buttonClick_title: "Résumer en français",
+      buttonClick_title_summarized: "Email déjà résumé en français",
+      summary_placeholder: "Cliquer sur le bouton pour résumer...",
   },
   english: {
       fr_flag_title: "Switch to french",
@@ -30,8 +31,9 @@ const languageStrings = {
       aText: "Show more",
       oppositeAText: "Show less",
       buttonClick_text: "Summarize email",
-      summary_placeholder: "Summarize in english...",
-      opposite_summary_placeholder: "Résumer en français...",
+      buttonClick_title: "Summarize in english",
+      buttonClick_title_summarized: "Email already summarized in english",
+      summary_placeholder: "Click on the button to summarize...",
   },
   arabic: {
       fr_flag_title: "التبديل إلى الفرنسية",
@@ -46,8 +48,9 @@ const languageStrings = {
       aText: "عرض المزيد",
       oppositeAText: "عرض اقل",
       buttonClick_text: "تلخيص البريد الإلكتروني",
-      summary_placeholder: "تلخيص باللغة العربية...",
-      opposite_summary_placeholder: "Summarize in english...",
+      buttonClick_title: "تلخيص باللغة العربية",
+      buttonClick_title_summarized: "البريد الإلكتروني تم تلخيصه باللغة العربية",
+      summary_placeholder: "انقر على الزر للتلخيص...",
       rtl: true
   },
   spanish: {
@@ -63,8 +66,9 @@ const languageStrings = {
       aText: "Ver más",
       oppositeAText: "mostrar menos",
       buttonClick_text: "Resumir el correo electrónico",
-      summary_placeholder: "Resumir en español...",
-      opposite_summary_placeholder: "Summarize in english...",
+      buttonClick_title: "Resumir en español",
+      buttonClick_title_summarized: "Correo electrónico ya resumido en español",
+      summary_placeholder: "Haga clic en el botón para resumir...",
   },
   portuguese: {
       fr_flag_title: "Mudar para francês",
@@ -79,8 +83,9 @@ const languageStrings = {
       aText: "Mostrar mais",
       oppositeAText: "mostrar menos",
       buttonClick_text: "Resumir o email",
-      summary_placeholder: "Resumir em português...",
-      opposite_summary_placeholder: "Summarize in english...",
+      buttonClick_title: "Resumo em português",
+      buttonClick_title_summarized: "E-mail já resumido em português",
+      summary_placeholder: "Clique no botão para resumir...",
   },
   german: {
       fr_flag_title: "Wechseln Sie zu Französisch",
@@ -95,8 +100,9 @@ const languageStrings = {
       aText: "Mehr anzeigen",
       oppositeAText: "weniger zeigen",
       buttonClick_text: "E-Mail zusammenfassen",
-      summary_placeholder: "Zusammenfassen auf Deutsch...",
-      opposite_summary_placeholder: "Summarize in english...",
+      buttonClick_title: "Zusammenfassung auf Portugiesisch",
+      buttonClick_title_summarized: "E-Mail bereits auf Portugiesisch zusammengefasst",
+      summary_placeholder: "Klicken Sie auf die Schaltfläche, um die E-Mail zusammenzufassen...",
   }
 };
 
@@ -125,21 +131,6 @@ function showMoreLess() {
     descriptionText.classList.add('collapsed');
   }
 }
-
-// Function to toggle flags
-async function toggleFlags() {
-  const flagsDiv = await document.getElementById('flags');
-  const toggleText = await document.getElementById('toggleFlags');
-
-  if (flagsDiv.style.display === 'none' || flagsDiv.style.display === '') {
-      flagsDiv.style.display = 'block';
-      toggleText.innerText = 'Hide change language menu';
-  } else {
-      flagsDiv.style.display = 'none';
-      toggleText.innerText = 'Change language';
-  }
-}
-
 
 //Function to set the language of the add-in
 function setLanguage(lang) {
@@ -176,10 +167,19 @@ function setLanguage(lang) {
 
   if (isPlaceholderText) {
       summaryElement.innerText = langData.summary_placeholder;
+      buttonClick.title = langData.buttonClick_title;
+  }else{
+    if(currentLanguage === summaryLanguage){
+    buttonClick.title = langData.buttonClick_title_summarized;
+    }else{
+      buttonClick.title = langData.buttonClick_title;
+    }
   }
   buttonClick.innerText = langData.buttonClick_text;
+  
   buttonClick.disabled = (summaryLanguage === currentLanguage && summaryElement.innerText !== langData.summary_placeholder);
 
+  // Text align (right-to-left for arabic)
   if (langData.rtl) {
       document.body.style.direction = 'rtl';
   } else {
@@ -277,6 +277,7 @@ async function summarizeEmail() {
         resolve();
       });
     });
+    button.title = languageStrings[currentLanguage].buttonClick_title_summarized;
   } catch (error) {
     summaryElement.style.color = 'red';
     summaryElement.innerText = 'Sorry :(, an error occured. Check the console for more info.'

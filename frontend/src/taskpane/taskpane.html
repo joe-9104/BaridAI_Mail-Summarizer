@@ -12,12 +12,11 @@
         <div class="flags" id="flags">
             <img id="fr_flag" src="../../assets/french_flag.jpg" alt="French" title="Switch to French" onclick="setLanguage('french')"/>
             <img id="uk_flag" src="../../assets/uk_flag.svg" alt="English" title="English" onclick="setLanguage('english')"/>
-            <img id="ar_flag" src="../../assets/tunisian_flag.png" alt="Arabic" title="Arabic" onclick="setLanguage('arabic')"/>
-            <img id="es_flag" src="../../assets/spanish_flag.png" alt="Spanish" title="Spanish" onclick="setLanguage('spanish')"/>
-            <img id="pr_flag" src="../../assets/portuguese_flag.png" alt="Portuguese" title="Portuguese" onclick="setLanguage('portuguese')"/>
-            <img id="de_flag" src="../../assets/german_flag.png" alt="German" title="German" onclick="setLanguage('german')"/>
+            <img id="ar_flag" src="../../assets/tunisian_flag.png" alt="Arabic" title="Switch to Arabic" onclick="setLanguage('arabic')"/>
+            <img id="es_flag" src="../../assets/spanish_flag.png" alt="Spanish" title="Switch to Spanish" onclick="setLanguage('spanish')"/>
+            <img id="pr_flag" src="../../assets/portuguese_flag.png" alt="Portuguese" title="Switch to Portuguese" onclick="setLanguage('portuguese')"/>
+            <img id="de_flag" src="../../assets/german_flag.png" alt="German" title="Switch to German" onclick="setLanguage('german')"/>
         </div>
-        <div id="toggleFlags" onclick="toggleFlags()">Change language</div>
         <div class="header">
             <h1 id="headerText">BaridAI - Your Email Assistant</h1>
         </div>
@@ -27,8 +26,8 @@
     <a id="atext" href="#" onclick="showMoreLess()">Show more</a>
 
     <div class="main">
-        <pre id="summaryText">Summarize in english...</pre>
-        <button id="buttonClick" onclick="summarizeEmail()">Summarize Email</button>
+        <pre id="summaryText">Click on the button to summarize...</pre>
+        <button id="buttonClick" title="Summarize in english" onclick="summarizeEmail()">Summarize Email</button>
         <div id="placeholdermsg" class="vidDiv" style="display:none;">
             <video id="loadingVideo" src="../../assets/dynamic_logo.mp4" autoplay loop muted 
                    style="height: 60px; border-radius: 15px; border: 5px solid rgba(255,255,255,0.5); align-items: center;"></video>

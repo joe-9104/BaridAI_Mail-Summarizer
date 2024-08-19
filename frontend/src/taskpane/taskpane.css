@@ -23,7 +23,7 @@ body {
 
 /* Style the flags */
 .flags {
-    display: none;
+    /*display: none;*/
     position: inherit;
     align-self: flex-end;
     padding-right: 20px;
@@ -44,7 +44,6 @@ body {
 #toggleFlags {
     cursor: pointer;
     font-size: small;
-    margin-left: 16px;
     color: #38606e;
 }
 
