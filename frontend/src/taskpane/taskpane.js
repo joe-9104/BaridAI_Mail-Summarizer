@@ -182,8 +182,12 @@ function setLanguage(lang) {
   // Text align (right-to-left for arabic)
   if (langData.rtl) {
       document.body.style.direction = 'rtl';
+      aText.style.paddingLeft = '0';
+      aText.style.paddingRight = '20px';
   } else {
       document.body.style.direction = 'ltr';
+      aText.style.paddingRight = '0';
+      aText.style.paddingLeft = '20px'; 
   }
 }
 
