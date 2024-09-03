@@ -16,7 +16,7 @@
 ***Technology Stack***
 - *Frontend*: The add-in's interface is crafted with HTML, CSS, and JavaScript, delivering a seamless and responsive user experience directly within Outlook.
 - *Backend*: A Flask-based Python server powers the backend, utilizing the genai library to interact with AI models for email content generation and summarization.
-- *AI Models*: The project employs Google's Gemini 1.5 Flash model to generate both the body and subject of emails.
+- *AI Models*: The project employs Google's Gemini 1.5 Flash model to summarize the mail.
 
 
 ***Compatibility***
